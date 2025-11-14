@@ -1,0 +1,3 @@
+[submodule "Healthcare-Server"]
+	path = Healthcare-Server
+	url = https://github.com/vaibhavqss-dev/Healthcare-Server.git
