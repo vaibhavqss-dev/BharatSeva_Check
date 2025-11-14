@@ -1,3 +1,18 @@
 [submodule "Healthcare-Server"]
 	path = Healthcare-Server
 	url = https://github.com/vaibhavqss-dev/Healthcare-Server.git
+[submodule "Worker"]
+	path = Worker
+	url = https://github.com/vaibhavqss-dev/Worker.git
+[submodule "Client-Server"]
+	path = Client-Server
+	url = https://github.com/vaibhavqss-dev/Client-Server.git
+[submodule "HealthCare-Interface"]
+	path = HealthCare-Interface
+	url = https://github.com/vaibhavqss-dev/HealthCare-Interface.git
+[submodule "Client-Interface"]
+	path = Client-Interface
+	url = https://github.com/vaibhavqss-dev/Client-Interface.git
+[submodule "Monitoring"]
+	path = Monitoring
+	url = https://github.com/vaibhavqss-dev/Monitoring.git
