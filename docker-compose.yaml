@@ -171,7 +171,7 @@ services:
     ports:
       - "9090:9090"
     volumes:
-      - ./Monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -185,10 +185,10 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./Monitoring/grafana/dashboards:/var/lib/grafana/dashboards
-      - ./Monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
       # - ./Monitoring/grafana/data:/var/lib/grafana
-      - ./Monitoring/grafana/logs:/var/log/grafana
+      - ./monitoring/grafana/logs:/var/log/grafana
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
