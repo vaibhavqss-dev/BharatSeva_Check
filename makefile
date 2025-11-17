@@ -1,9 +1,6 @@
 ################ Main Targets ################
 init: init-submodules update-submodule start
 
-init-submodules:
-	@git submodule update --init --recursive
-
 start:
 	@docker compose up --build -d
 
@@ -11,17 +8,14 @@ stop:
 	@docker compose down
 
 ################ Utility Targets ################
+init-submodules:
+	@git submodule update --init --recursive
+
 update-submodule:
 	@git submodule update --remote --merge --recursive
 
 status:
 	@docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Status}}"
-
-rm-vol:
-	@docker volume prune -f
-
-rm-img:
-	@docker compose down --rmi all
 
 reload: reload-nginx
 
@@ -35,7 +29,24 @@ reload-postgres:
 	@docker compose up -d postgres
 	@printf $(COLOR) "Postgres fully reset."
 
+rebuild-all: rebuild-client rebuild-healthcare
+
+rebuild-client:
+	@cd ./Client-Interface && npm i && npm run build
+	@printf $(COLOR) "Static files rebuilt successfully."
+	@docker exec -it nginx nginx -s reload
+	@printf $(LIME) "Nginx reloaded successfully."
+	@cd ..
+
+rebuild-healthcare:
+	@cd ./healthcare-interface && npm i && npm run build
+	@printf $(COLOR) "healthcare-interface rebuilt successfully."
+	@docker exec -it nginx nginx -s reload
+	@printf $(LIME) "Nginx reloaded successfully."
+	@cd ..
+
 ################ Colors and Variables ################
 COLOR := "\e[1;36m%s\e[0m\n"
 RED :=   "\e[1;31m%s\e[0m\n"
+LIME := "\e[1;92m%s\e[0m\n"
 PARENT_NAME := $(notdir $(abspath $(dir $(lastword $(MAKEFILE_LIST)))))
